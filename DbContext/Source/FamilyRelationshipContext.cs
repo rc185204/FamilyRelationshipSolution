@@ -1,8 +1,15 @@
 ﻿using System;
+using System.Data.Entity;
 
-namespace FRS.DbContext
+namespace FRS.DatabaseContext
 {
-    public class FamilyRelationshipContext
+    public class FamilyRelationshipContext: DbContext
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public FamilyRelationshipContext() : base()
+        {
+        }
     }
 }
