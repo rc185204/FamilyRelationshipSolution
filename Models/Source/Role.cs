@@ -9,5 +9,11 @@ namespace FRS.Models
     public class Role
     {
         public Role() { }
+
+        private int _RoleId;
+
+        private string _RoleName;
+
+        private string _Description;
     }
 }
