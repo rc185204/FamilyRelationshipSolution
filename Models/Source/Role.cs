@@ -15,11 +15,10 @@ namespace FRS.Models
         public Role() { }
 
         [Key]//数据库中对应列为主键
-        [Required]        
-        [MaxLength(20)]
+        [Required]//属性不为空，数据中对应列
         public int RoleId { get; set; }
 
-        [Required]//属性不为空，数据中对应列
+        [Required]
         [MinLength(4)]//属性和数据库中的最小的string长度
         [MaxLength(20)]//属性和数据库中的最大的string长度
         [ConcurrencyCheck]//数据库中对应列进行乐观并发检测，主要用于解决高并发问题
