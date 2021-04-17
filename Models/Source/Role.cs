@@ -8,5 +8,6 @@ namespace FRS.Models
 {
     public class Role
     {
+        public Role() { }
     }
 }
