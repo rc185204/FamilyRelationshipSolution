@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FRS.Models
 {
-    [Table("Role", Schema = "FamilyRelationship")]
+    [Table("User")]
     public class User
     {
         public User() { }
@@ -36,12 +36,28 @@ namespace FRS.Models
 
         public byte[] HeaderImage { get; set; }
 
-        [NotMapped]//不映射到数据库中
-        public int? Age { get; set; }
 
-        public int RoleRefId { get; set; }
+        public int RoleId { get; set; }
 
-        [ForeignKey("RoleRefId")]//外键 [ForeignKey(导航属性名)] 依赖实体中在导航属性上指定属性名
+
+        [ForeignKey("RoleId")]//外键 [ForeignKey(导航属性名)] 依赖实体中在导航属性上指定属性名
         public Role Role { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? FamilyId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [ForeignKey("FamilyId")]
+        public Family? Family { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

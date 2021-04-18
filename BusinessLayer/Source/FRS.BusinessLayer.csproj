@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>FRS.BusinessLayer.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Source\FRS.Common.csproj" />
+    <ProjectReference Include="..\..\DbContext\Source\FRS.DatabaseContext.csproj" />
+    <ProjectReference Include="..\..\Models\Source\FRS.Models.csproj" />
+  </ItemGroup>
+
+</Project>

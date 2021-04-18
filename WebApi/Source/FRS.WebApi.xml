@@ -1,0 +1,671 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FRS.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:FRS.WebApi.Controllers.AuthenticationController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.AuthenticationController.#ctor(FRS.WebApi.Log.ILoggerHelper)">
+            <summary>
+            
+            </summary>
+            <param name="loggerHelper"></param>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.AuthenticationController.Get(System.String,System.String)">
+            <summary>
+            异步用户认证
+            </summary>
+            <param name="uname">User name</param>
+            <param name="pwd">Password</param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.AuthenticationController.RefreshToken(FRS.WebApi.JwtConfig.RefreshTokenBody)">
+            <summary>
+            刷新身份认证
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FRS.WebApi.Controllers.CertificateTypeController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.CertificateTypeController.Post(FRS.Models.CertificateType)">
+            <summary>
+            添加证件类型
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FRS.WebApi.Controllers.UserController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.UserController.Post(FRS.Models.User)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="obj">POST请求的表单数据放在 body中，而GET的请求参数在url中，需要使用FromUri</param>
+            <returns></returns>
+        </member>
+        <member name="T:FRS.WebApi.Filters.ApiVersionHeaderParameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Filters.ApiVersionHeaderParameter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:FRS.WebApi.Filters.CompressionAttribute">
+            <summary>
+            压缩过滤器，建议使用在返回数据比较大的action中，因为压缩本身需要消耗时间，如果较小的数据进行压缩，效果不明显，反而会消耗时间，从而降低执行效率
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Filters.CompressionAttribute.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            对执行后的返回结果进行压缩
+            </summary>
+            <param name="actContext"></param>
+        </member>
+        <member name="T:FRS.WebApi.Filters.FileUploadOperation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Filters.FileUploadOperation.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:FRS.WebApi.Filters.GlobalExceptionFilter">
+            <summary>
+            异常处理过滤器
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Filters.GlobalExceptionFilter.#ctor(FRS.WebApi.Log.ILoggerHelper,Microsoft.Extensions.Hosting.IHostEnvironment,Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider)">
+            <summary>
+            构造异常过滤器
+            </summary>
+            <param name="loggerHelper"></param>
+            <param name="hostingEnvironment"></param>
+            <param name="modelMetadataProvider"></param>
+        </member>
+        <member name="M:FRS.WebApi.Filters.GlobalExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:FRS.WebApi.Helper.AppSettings">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Helper.AppSettings.SetAppSetting(Microsoft.Extensions.Configuration.IConfigurationSection)">
+            <summary>
+            设置配置文件
+            </summary>
+            <param name="section"></param>
+        </member>
+        <member name="M:FRS.WebApi.Helper.AppSettings.GetAppSeting(System.String)">
+            <summary>
+            获取配置文件
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FRS.WebApi.JwtConfig.GenerateJwt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.JwtConfig.GenerateJwt.SetJwtConfig(FRS.WebApi.JwtConfig.JwtConfig)">
+            <summary>
+            设置配置文件
+            </summary>
+            <param name="section"></param>
+        </member>
+        <member name="M:FRS.WebApi.JwtConfig.GenerateJwt.GenerateEncodedTokenAsync(FRS.Models.User)">
+            <summary>
+            生成token
+            </summary>
+            <param name="sub"></param>
+            <param name="customClaims">携带的用户信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.JwtConfig.GenerateJwt.RefreshEncodedTokenAsync(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            
+            </summary>
+            <param name="simplePrinciple"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.JwtConfig.GenerateJwt.SerializeJwt(System.String)">
+            <summary>
+            解析token
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.JwtConfig.GenerateJwt.ValidateAccessToken(System.String,System.Security.Claims.ClaimsPrincipal@)">
+            <summary>
+            验证客户端的AccessToken
+            </summary>
+            <param name="token"></param>
+            <param name="simplePrinciple"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FRS.WebApi.JwtConfig.JwtConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.SecretKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.Issuer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.Audience">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.Expired">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.RefreshTokenExpired">
+            <summary>
+            刷新token的时间与token的失效时间间隔m
+            当token的失效后，需要刷新token的时候，
+            在ValidateAccessToken时，需要判断token的失效时间是否超过当前值，如果超过了当前值，则不再支持刷新
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.NotBefore">
+            <summary>
+            使用国际标准时间
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.IssuedAt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.Expiration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.SigningKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtConfig.SigningCredentials">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:FRS.WebApi.JwtConfig.JwtTokenResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.access_token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.refresh_token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.expires_in">
+            <summary>
+            过期时间(单位秒)
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.token_type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.user">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:FRS.WebApi.JwtConfig.RefreshTokenBody">
+            <summary>
+            用来刷新token的请求body
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.RefreshTokenBody.AccessToken">
+            <summary>
+            原始签发的token
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.JwtConfig.RefreshTokenBody.RefreshToken">
+            <summary>
+            刷新token时的二次验证token,
+            该token在登录的时候返回，过期时间较长，一旦拥有后，过期之后不再支持token重新签发，必须重新登录
+            </summary>
+        </member>
+        <member name="T:FRS.WebApi.Log.ILoggerHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Debug(System.Object,System.String)">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Debug(System.Object,System.String,System.Object[])">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="ps">ps</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Debug(System.Type,System.String)">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Info(System.Object,System.Object)">
+            <summary>
+            关键信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Info(System.Type,System.Object)">
+            <summary>
+            关键信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Warn(System.Object,System.Object)">
+            <summary>
+            警告信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Warn(System.Type,System.Object)">
+            <summary>
+            警告信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Error(System.Object,System.Object)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Error(System.Type,System.Object)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Fatal(System.Object,System.Object)">
+            <summary>
+            失败信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Fatal(System.Type,System.Object)">
+            <summary>
+            失败信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Debug(System.Object,System.Object,System.Exception)">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Debug(System.Type,System.Object,System.Exception)">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Info(System.Object,System.Object,System.Exception)">
+            <summary>
+            关键信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Info(System.Type,System.Object,System.Exception)">
+            <summary>
+            关键信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Warn(System.Object,System.Object,System.Exception)">
+            <summary>
+            警告信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Warn(System.Type,System.Object,System.Exception)">
+            <summary>
+            警告信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Error(System.Object,System.Object,System.Exception)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Error(System.Type,System.Object,System.Exception)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Fatal(System.Object,System.Object,System.Exception)">
+            <summary>
+            失败信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.ILoggerHelper.Fatal(System.Type,System.Object,System.Exception)">
+            <summary>
+            失败信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="T:FRS.WebApi.Log.LoggerHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.GetLogger(System.Type)">
+            <summary>
+            获取记录器
+            </summary>
+            <param name="source">soruce</param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Debug(System.Object,System.String)">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Debug(System.Object,System.String,System.Object[])">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="ps">ps</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Debug(System.Type,System.String)">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Info(System.Object,System.Object)">
+            <summary>
+            关键信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Info(System.Type,System.Object)">
+            <summary>
+            关键信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Warn(System.Object,System.Object)">
+            <summary>
+            警告信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Warn(System.Type,System.Object)">
+            <summary>
+            警告信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Error(System.Object,System.Object)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Error(System.Type,System.Object)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Fatal(System.Object,System.Object)">
+            <summary>
+            失败信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Fatal(System.Type,System.Object)">
+            <summary>
+            失败信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Debug(System.Object,System.Object,System.Exception)">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Debug(System.Type,System.Object,System.Exception)">
+            <summary>
+            调试信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Info(System.Object,System.Object,System.Exception)">
+            <summary>
+            关键信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Info(System.Type,System.Object,System.Exception)">
+            <summary>
+            关键信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Warn(System.Object,System.Object,System.Exception)">
+            <summary>
+            警告信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Warn(System.Type,System.Object,System.Exception)">
+            <summary>
+            警告信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Error(System.Object,System.Object,System.Exception)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Error(System.Type,System.Object,System.Exception)">
+            <summary>
+            错误信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Fatal(System.Object,System.Object,System.Exception)">
+            <summary>
+            失败信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="M:FRS.WebApi.Log.LoggerHelper.Fatal(System.Type,System.Object,System.Exception)">
+            <summary>
+            失败信息
+            </summary>
+            <param name="source">source</param>
+            <param name="message">message</param>
+            <param name="exception">ex</param>
+        </member>
+        <member name="T:FRS.WebApi.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:FRS.WebApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FRS.WebApi.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.Startup.repository">
+            <summary>
+            log4net 仓储库
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:FRS.WebApi.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            This method gets called by the runtime. Use this method to add services to the container.
+        </member>
+        <member name="M:FRS.WebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        </member>
+        <member name="T:FRS.WebApi.WeatherForecast">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

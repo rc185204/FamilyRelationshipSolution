@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace FRS.Models
 {
-    [Table("Role", Schema = "FamilyRelationship")]//数据库名为FamilyRelationship.Role.用于实体，配置实体对应的数据库表名和表结构
+    [Table("Role"/*, Schema = "FamilyRelationship"*/)]//数据库名为FamilyRelationship.Role.用于实体，配置实体对应的数据库表名和表结构
     public class Role
     {
 
         public Role() { }
+
 
         [Key]//数据库中对应列为主键
         [Required]//属性不为空，数据中对应列
@@ -24,6 +25,9 @@ namespace FRS.Models
         [ConcurrencyCheck]//数据库中对应列进行乐观并发检测，主要用于解决高并发问题
         public string RoleName { get; set; }
 
+        /// <summary>
+        /// 描述
+        /// </summary>
         public string Description { get; set; }
 
         /// <summary>
