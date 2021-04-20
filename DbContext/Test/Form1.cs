@@ -33,7 +33,7 @@ namespace FRS.DatabaseContextTest
                 
 
                 CertificateType type = new CertificateType();
-                type.CertificateTypeNmae = "二代身份证";
+                type.CertificateTypeName = "二代身份证";
                 type.Description = "二代身份证";
                 FRSDbContext.CertificateType.Add(type);
 
@@ -85,8 +85,8 @@ namespace FRS.DatabaseContextTest
             member.Description = "驾驶证2";
             //member.CertificateTypeId = 100;
 
-            int rows = BLCertificateType.Add(member);
-            MessageBox.Show(rows.ToString());
+            //int rows = BLCertificateType.Add(member);
+            //MessageBox.Show(rows.ToString());
         }
 
         private void btRemoveCertificateType_Click(object sender, EventArgs e)
@@ -100,7 +100,7 @@ namespace FRS.DatabaseContextTest
         private void btUpdateCertificateType_Click(object sender, EventArgs e)
         {
             CertificateType member = BLCertificateType.GetAll().Last();
-            member.CertificateTypeNmae = member.CertificateTypeNmae + "Update";
+            member.CertificateTypeName = member.CertificateTypeName + "Update";
             int rows = BLCertificateType.Update(member);
             MessageBox.Show(rows.ToString());
         }

@@ -1,3 +1,4 @@
+using FRS.DatabaseContext;
 using FRS.WebApi.Filters;
 using FRS.WebApi.Helper;
 using FRS.WebApi.JwtConfig;
@@ -62,6 +63,9 @@ namespace FRS.WebApi
 
             services.AddControllers();
             AppSettings.SetAppSetting(Configuration.GetSection("AppSettings"));
+
+            //services.AddDbContext<FamilyRelationshipContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             #region Swagger≈‰÷√
 

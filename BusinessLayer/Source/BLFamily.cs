@@ -59,7 +59,7 @@ namespace FRS.BusinessLayer
             ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
             {
-                if (dbContext.Family.Find(Member.FamilyNmae) != null)
+                if (dbContext.Family.Find(Member.FamilyName) != null)
                 {
                     code = ErrorCode.DataAlreadyExist;
                 }
@@ -121,7 +121,7 @@ namespace FRS.BusinessLayer
             using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
             {
                 Family up = dbContext.Family.Where<Family>(c => c.FamilyId == Member.FamilyId).FirstOrDefault();
-                up.FamilyNmae = Member.FamilyNmae;
+                up.FamilyName = Member.FamilyName;
                 up.FamilyOrigin = Member.FamilyOrigin; 
                 up.FamilyHistory = Member.FamilyHistory;
                 up.GenerationInfo = Member.GenerationInfo;

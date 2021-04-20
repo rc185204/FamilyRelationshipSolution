@@ -45,7 +45,6 @@ namespace FRS.BusinessLayer
             ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
             {
-                if (dbContext.CertificateType.Find(Member.CertificateTypeNmae) != null)
                 {
                     code = ErrorCode.DataAlreadyExist;
                 }
@@ -107,7 +106,7 @@ namespace FRS.BusinessLayer
             using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
             {
                 CertificateType up = dbContext.CertificateType.Where<CertificateType>(c => c.CertificateTypeId == Member.CertificateTypeId).FirstOrDefault();
-                up.CertificateTypeNmae = Member.CertificateTypeNmae;
+                up.CertificateTypeName = Member.CertificateTypeName;
                 up.Description = Member.Description;
                 rows = dbContext.SaveChanges();
             }

@@ -1,9 +1,11 @@
+using FRS.DatabaseContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +24,8 @@ namespace FRS.WebApi
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            //Database.SetInitializer<FamilyRelationshipContext>(null);
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<FamilyRelationshipContext>());
         }
 
         /// <summary>

@@ -28,6 +28,12 @@ namespace FRS.DatabaseContext
             
         }
 
+        //public FamilyRelationshipContext(DbContextOptions<FamilyRelationshipContext> options)
+        //    : base(options)
+        //{
+        //}
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //// 禁用默认表名复数形式
