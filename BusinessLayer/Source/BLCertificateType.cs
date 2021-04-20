@@ -45,6 +45,7 @@ namespace FRS.BusinessLayer
             ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
             {
+                if (dbContext.CertificateType.Find(Member.CertificateTypeName) != null)
                 {
                     code = ErrorCode.DataAlreadyExist;
                 }
