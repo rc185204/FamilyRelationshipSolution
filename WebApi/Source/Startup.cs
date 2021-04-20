@@ -1,6 +1,6 @@
+using FRS.Common;
 using FRS.DatabaseContext;
 using FRS.WebApi.Filters;
-using FRS.WebApi.Helper;
 using FRS.WebApi.JwtConfig;
 using FRS.WebApi.Log;
 using log4net;
@@ -62,12 +62,18 @@ namespace FRS.WebApi
         {
 
             services.AddControllers();
+
+            #region 读取配置文件
             AppSettings.SetAppSetting(Configuration.GetSection("AppSettings"));
 
             //services.AddDbContext<FamilyRelationshipContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));// 如果在api中使用FamilyRelationshipContext，则在此处全局注入
 
-            #region Swagger配置
+            
+            AppSettings.SqlConn = AppSettings.GetAppSeting("SqlConn");
+            #endregion
+
+            #region Swagger config
 
             services.AddSwaggerGen(c =>
             {
@@ -124,7 +130,7 @@ namespace FRS.WebApi
 
             #endregion
 
-            #region 添加 jwt 认证
+            #region Add jwt Authentication
             services.Configure<JwtConfig.JwtConfig>(Configuration.GetSection("JwtConfig"));
             var jwtConfig = new JwtConfig.JwtConfig();
             Configuration.Bind("JwtConfig", jwtConfig);

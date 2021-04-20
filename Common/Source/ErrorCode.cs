@@ -39,7 +39,7 @@ namespace FRS.Common
         /// <summary>
         /// 查询数据不存在
         /// </summary>
-        NoData,
+        DataNotExist,
 
         /// <summary>
         /// 数据已经存在，不能新增

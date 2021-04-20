@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace FRS.WebApi.Helper
+namespace FRS.Common
 {
     /// <summary>
     /// 
@@ -12,6 +13,8 @@ namespace FRS.WebApi.Helper
     public class AppSettings
     {
         private static IConfigurationSection appSection = null;
+
+        public static string SqlConn;
 
         /// <summary>
         /// 设置配置文件

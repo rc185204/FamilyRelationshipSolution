@@ -42,6 +42,20 @@
             <param name="obj"></param>
             <returns></returns>
         </member>
+        <member name="M:FRS.WebApi.Controllers.CertificateTypeController.Delete(FRS.Models.CertificateType)">
+            <summary>
+            删除证件类型
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.CertificateTypeController.Put(FRS.Models.CertificateType)">
+            <summary>
+            修改证件类型信息
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
         <member name="T:FRS.WebApi.Controllers.UserController">
             <summary>
             
@@ -52,6 +66,23 @@
             添加用户
             </summary>
             <param name="obj">POST请求的表单数据放在 body中，而GET的请求参数在url中，需要使用FromUri</param>
+            <returns></returns>
+        </member>
+        <member name="T:FRS.WebApi.Controllers.WeatherForecastController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{FRS.WebApi.Controllers.WeatherForecastController})">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.WeatherForecastController.Get">
+            <summary>
+            
+            </summary>
             <returns></returns>
         </member>
         <member name="T:FRS.WebApi.Filters.ApiVersionHeaderParameter">
@@ -108,24 +139,6 @@
             </summary>
             <param name="context"></param>
         </member>
-        <member name="T:FRS.WebApi.Helper.AppSettings">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:FRS.WebApi.Helper.AppSettings.SetAppSetting(Microsoft.Extensions.Configuration.IConfigurationSection)">
-            <summary>
-            设置配置文件
-            </summary>
-            <param name="section"></param>
-        </member>
-        <member name="M:FRS.WebApi.Helper.AppSettings.GetAppSeting(System.String)">
-            <summary>
-            获取配置文件
-            </summary>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
         <member name="T:FRS.WebApi.JwtConfig.GenerateJwt">
             <summary>
             
@@ -141,13 +154,12 @@
             <summary>
             生成token
             </summary>
-            <param name="sub"></param>
             <param name="customClaims">携带的用户信息</param>
             <returns></returns>
         </member>
         <member name="M:FRS.WebApi.JwtConfig.GenerateJwt.RefreshEncodedTokenAsync(System.Security.Claims.ClaimsPrincipal)">
             <summary>
-            
+            刷新token信息
             </summary>
             <param name="simplePrinciple"></param>
             <returns></returns>
@@ -663,6 +675,26 @@
             This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         </member>
         <member name="T:FRS.WebApi.WeatherForecast">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.WeatherForecast.Date">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.WeatherForecast.TemperatureC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.WeatherForecast.TemperatureF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FRS.WebApi.WeatherForecast.Summary">
             <summary>
             
             </summary>

@@ -1,5 +1,4 @@
 ﻿using FRS.Common;
-using FRS.WebApi.Helper;
 using FRS.WebApi.Log;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

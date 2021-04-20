@@ -20,7 +20,7 @@ namespace FRS.BusinessLayer
         public static User Valid(string UserName, string PassWord)
         {
             User User = null;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 ///该写法有sql注入风险
                 //User = dbContext.Users.Where<User>(user => (user.UserName == UserName && user.Password == PassWord)).First() as User;
@@ -33,7 +33,7 @@ namespace FRS.BusinessLayer
                 User = dbContext.Database.SqlQuery<User>(sql, args).FirstOrDefault();
                 if (User != null)
                 {
-                    User.Role = dbContext.Role.Where<Role>(c => c.RoleId == User.RoleId).FirstOrDefault();
+                    User.Role = dbContext.Role.Find(User.RoleId);
                     if (User.FamilyId != null)
                         User.Family = dbContext.Family.Where<Family>(c=> c.FamilyId == User.FamilyId).FirstOrDefault();
                 }                
@@ -60,7 +60,7 @@ namespace FRS.BusinessLayer
         public static ErrorCode Add(User Member)
         {
             ErrorCode code = ErrorCode.Unknown_Error;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 if (dbContext.User.Find(Member.UserName) != null)
                 {

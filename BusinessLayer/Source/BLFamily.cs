@@ -30,9 +30,9 @@ namespace FRS.BusinessLayer
         public static Family Get(int FamilyId)
         {
             Family Family = null;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                Family = dbContext.Family.Where<Family>(c => c.FamilyId == FamilyId).FirstOrDefault();
+                Family = dbContext.Family.Find(FamilyId);
                 //if (Family != null)
                 //{
                 //    Family.FamilyMembers = dbContext.FamilyMember.Where<FamilyMember>(c => c.FamilyId == Family.FamilyId).ToList();
@@ -57,7 +57,7 @@ namespace FRS.BusinessLayer
         public static ErrorCode Add(Family Member)
         {
             ErrorCode code = ErrorCode.Unknown_Error;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 if (dbContext.Family.Find(Member.FamilyName) != null)
                 {
@@ -84,9 +84,9 @@ namespace FRS.BusinessLayer
         public static int Remove(Family Member)
         {
             int rows = 0;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                Family rem = dbContext.Family.Where<Family>(c => c.FamilyId == Member.FamilyId).FirstOrDefault();
+                Family rem = dbContext.Family.Find(Member.FamilyId);
                 dbContext.Family.Remove(rem);
                 rows = dbContext.SaveChanges();
             }
@@ -101,9 +101,9 @@ namespace FRS.BusinessLayer
         public static int Remove(int FamilyId)
         {
             int rows = 0;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                Family rem = dbContext.Family.Where<Family>(c => c.FamilyId == FamilyId).FirstOrDefault();
+                Family rem = dbContext.Family.Find(FamilyId);
                 dbContext.Family.Remove(rem);
                 rows = dbContext.SaveChanges();
             }
@@ -118,9 +118,9 @@ namespace FRS.BusinessLayer
         public static int Update(Family Member)
         {
             int rows = 0;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                Family up = dbContext.Family.Where<Family>(c => c.FamilyId == Member.FamilyId).FirstOrDefault();
+                Family up = dbContext.Family.Find(Member.FamilyId);// Find 它可以帮助我们通过主键来查找对应的实体。并且如果相应的实体已经被DbContext缓存，EF会在缓存中直接返回对应的实体，而不会执行数据库访问。
                 up.FamilyName = Member.FamilyName;
                 up.FamilyOrigin = Member.FamilyOrigin; 
                 up.FamilyHistory = Member.FamilyHistory;

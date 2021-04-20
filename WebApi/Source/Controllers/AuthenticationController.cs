@@ -1,5 +1,4 @@
 ﻿using FRS.WebApi.Filters;
-using FRS.WebApi.Helper;
 using FRS.WebApi.JwtConfig;
 using Microsoft.AspNetCore.Mvc;
 using System;

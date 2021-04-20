@@ -2,7 +2,6 @@
 using FRS.Common;
 using FRS.Models;
 using FRS.WebApi.Filters;
-using FRS.WebApi.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

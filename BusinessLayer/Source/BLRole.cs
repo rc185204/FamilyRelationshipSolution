@@ -18,7 +18,7 @@ namespace FRS.BusinessLayer
         public static List<Role> GetAll()
         {
             List<Role> list = null;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 list = dbContext.Role.ToList();
             }
@@ -28,9 +28,9 @@ namespace FRS.BusinessLayer
         public static Role Get(int RoleId)
         {
             Role Role = null;
-            using (FamilyRelationshipContext dbContext = new FamilyRelationshipContext())
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                Role = dbContext.Role.Where<Role>(c => c.RoleId == RoleId).FirstOrDefault();
+                Role = dbContext.Role.Find(RoleId);
             }
             return Role;
         }

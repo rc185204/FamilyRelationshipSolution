@@ -29,7 +29,6 @@ namespace FRS.WebApi.JwtConfig
         /// <summary>
         /// 生成token
         /// </summary>
-        /// <param name="sub"></param>
         /// <param name="customClaims">携带的用户信息</param>
         /// <returns></returns>
         public static string GenerateEncodedTokenAsync(User customClaims)
@@ -61,7 +60,7 @@ namespace FRS.WebApi.JwtConfig
         }
 
         /// <summary>
-        /// 
+        /// 刷新token信息
         /// </summary>
         /// <param name="simplePrinciple"></param>
         /// <returns></returns>
@@ -122,7 +121,7 @@ namespace FRS.WebApi.JwtConfig
                     ValidIssuer = _jwtConfig.Issuer,
                     //颁发给谁
                     ValidAudience = _jwtConfig.Audience,
-                    RequireExpirationTime = false,// 这里暂时不去判断时间是否过期，只是否是正确的token
+                    RequireExpirationTime = false,// 这里暂时不去判断时间是否过期，只判断是否正确的token，为了当token在允许过期后的某个时间段内刷新token
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = false,
@@ -133,7 +132,6 @@ namespace FRS.WebApi.JwtConfig
                 var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
                 return principal;
             }
-
             catch (Exception exp)
             {
                 return null;
