@@ -39,7 +39,7 @@ namespace FRS.WebApi.JwtConfig
                 new Claim(ClaimTypes.SerialNumber, customClaims.UserId.ToString()),
                 new Claim(ClaimTypes.Name, customClaims.UserName),
                 new Claim(ClaimTypes.Role, customClaims.Role.RoleName),
-                new Claim("realname", customClaims.Role.RoleName),
+                new Claim("realname", customClaims.UserTrueName),
                 new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(_jwtConfig.NotBefore).ToUnixTimeSeconds()}") ,
                 new Claim(JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(_jwtConfig.Expiration).ToUnixTimeSeconds()}"),
             };
@@ -109,9 +109,8 @@ namespace FRS.WebApi.JwtConfig
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var jwtToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
 
-                if (jwtToken == null)
+                if (tokenHandler.ReadToken(token) is not JwtSecurityToken jwtToken)
                     return null;
 
                 //var symmetricKey = Convert.FromBase64String(_jwtConfig.SecretKey);
@@ -132,7 +131,7 @@ namespace FRS.WebApi.JwtConfig
                 var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
                 return principal;
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 return null;
             }
@@ -147,11 +146,12 @@ namespace FRS.WebApi.JwtConfig
         public static bool ValidateAccessToken(string token, out ClaimsPrincipal simplePrinciple)
         {
             simplePrinciple = SerializeJwt(token);
-            var identity = simplePrinciple?.Identity as ClaimsIdentity;
+            //ClaimsIdentity identity = simplePrinciple?.Identity as ClaimsIdentity;
+            //if (identity == null)
+            //    return false;
 
-            if (identity == null)
+            if (simplePrinciple?.Identity is not ClaimsIdentity identity)
                 return false;
-
             if (!identity.IsAuthenticated)
                 return false;
 
@@ -163,8 +163,7 @@ namespace FRS.WebApi.JwtConfig
 
             var expirationClaim = identity.FindFirst(JwtRegisteredClaimNames.Exp);
             var expiration = expirationClaim?.Value;
-            long exporationSeconds = 0;
-            long.TryParse(expiration, out exporationSeconds);
+            _ = long.TryParse(expiration, out long exporationSeconds);
             var UnixTimeSecondsNow = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();
 
             // 判断AccessToken是否过期，如果原始token没有过期，不签发新证书
@@ -175,6 +174,27 @@ namespace FRS.WebApi.JwtConfig
             if (exporationSeconds + _jwtConfig.RefreshTokenExpired < UnixTimeSecondsNow)
                 return false;
             return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public static string GetAccessUser(string token)
+        {
+            string userName = string.Empty;
+            ClaimsPrincipal simplePrinciple = SerializeJwt(token);
+            if (simplePrinciple?.Identity is not ClaimsIdentity identity)
+                return userName;
+            if (!identity.IsAuthenticated)
+                return userName;
+
+            var usernameClaim = identity.FindFirst(ClaimTypes.Name);
+            userName = usernameClaim?.Value;            
+            return userName;
+
+            
         }
     }
 

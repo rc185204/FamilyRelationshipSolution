@@ -39,7 +39,7 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="FamilyId"></param>
         /// <returns></returns>
-        public static List<FamilyMember> GetMembers(int FamilyId)
+        public static List<FamilyMember> GetMembers(string FamilyId)
         {
             List<FamilyMember> list = null;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())

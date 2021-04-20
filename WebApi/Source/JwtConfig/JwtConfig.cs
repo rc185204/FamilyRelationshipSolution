@@ -69,6 +69,6 @@ namespace FRS.WebApi.JwtConfig
         /// 
         /// </summary>
         public SigningCredentials SigningCredentials =>
-            new SigningCredentials(SigningKey, SecurityAlgorithms.HmacSha256);
+            new(SigningKey, SecurityAlgorithms.HmacSha256);
     }
 }

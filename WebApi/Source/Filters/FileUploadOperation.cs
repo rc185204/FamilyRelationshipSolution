@@ -22,9 +22,9 @@ namespace FRS.WebApi.Filters
             //判断上传文件的类型，只有上传的类型是IFormCollection的才进行重写。
             if (context.ApiDescription.ActionDescriptor.Parameters.Any(w => w.ParameterType == typeof(Microsoft.AspNetCore.Http.IFormCollection)))
             {
-                Dictionary<string, OpenApiSchema> schema = new Dictionary<string, OpenApiSchema>();
+                Dictionary<string, OpenApiSchema> schema = new();
                 schema["fileName"] = new OpenApiSchema { Description = "Select file", Type = "string", Format = "binary" };
-                Dictionary<string, OpenApiMediaType> content = new Dictionary<string, OpenApiMediaType>();
+                Dictionary<string, OpenApiMediaType> content = new();
                 content["multipart/form-data"] = new OpenApiMediaType { Schema = new OpenApiSchema { Type = "object", Properties = schema } };
                 operation.RequestBody = new OpenApiRequestBody() { Content = content };
             }

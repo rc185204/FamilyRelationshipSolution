@@ -17,7 +17,9 @@ namespace FRS.Models
         /// <summary>
         /// 
         /// </summary>
-        public int FamilyId { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string FamilyId { get; set; }
 
         /// <summary>
         /// 家族信息
@@ -174,7 +176,7 @@ namespace FRS.Models
         /// 配偶
         /// </summary>
         [ForeignKey("Spouse_FamilyMemberId")]
-        public FamilyMember? Spouse { get; set; }
+        public FamilyMember Spouse { get; set; }
 
         /// <summary>
         /// 
@@ -185,7 +187,7 @@ namespace FRS.Models
         /// 父亲
         /// </summary>
         [ForeignKey("Father_FamilyMemberId")]
-        public FamilyMember? Father { get; set; }
+        public FamilyMember Father { get; set; }
 
         /// <summary>
         /// 
@@ -196,7 +198,7 @@ namespace FRS.Models
         /// 母亲
         /// </summary>
         [ForeignKey("Mother_FamilyMemberId")]
-        public FamilyMember? Mother { get; set; }
+        public FamilyMember Mother { get; set; }
 
         /// <summary>
         /// 

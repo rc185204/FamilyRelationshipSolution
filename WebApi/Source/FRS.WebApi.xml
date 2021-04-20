@@ -23,7 +23,7 @@
             <param name="pwd">Password</param>
             <returns></returns>
         </member>
-        <member name="M:FRS.WebApi.Controllers.AuthenticationController.RefreshToken(FRS.WebApi.JwtConfig.RefreshTokenBody)">
+        <member name="M:FRS.WebApi.Controllers.AuthenticationController.Post(FRS.WebApi.JwtConfig.RefreshTokenBody)">
             <summary>
             刷新身份认证
             </summary>
@@ -32,8 +32,14 @@
         </member>
         <member name="T:FRS.WebApi.Controllers.CertificateTypeController">
             <summary>
-            
+            证件类型控制器
             </summary>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.CertificateTypeController.Get">
+            <summary>
+            获取所有证件类型集合
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:FRS.WebApi.Controllers.CertificateTypeController.Post(FRS.Models.CertificateType)">
             <summary>
@@ -56,16 +62,72 @@
             <param name="obj"></param>
             <returns></returns>
         </member>
+        <member name="T:FRS.WebApi.Controllers.FamilyController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyController.Get(System.String)">
+            <summary>
+            查找对应FamilyId的家族信息
+            </summary>
+            <param name="FamilyId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyController.Post(FRS.Models.Family)">
+            <summary>
+            修改
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyController.Put(FRS.Models.Family)">
+            <summary>
+            添加
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyController.Delete(FRS.Models.Family)">
+            <summary>
+            删除
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
         <member name="T:FRS.WebApi.Controllers.UserController">
             <summary>
             
             </summary>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.UserController.Get(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            模糊查询
+            </summary>
+            <param name="UserName"></param>
+            <param name="UserTrueName"></param>
+            <param name="RoleId"></param>
+            <returns></returns>
         </member>
         <member name="M:FRS.WebApi.Controllers.UserController.Post(FRS.Models.User)">
             <summary>
             添加用户
             </summary>
             <param name="obj">POST请求的表单数据放在 body中，而GET的请求参数在url中，需要使用FromUri</param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.UserController.Delete(FRS.Models.User)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.UserController.Put(FRS.Models.User)">
+            <summary>
+            修改用户信息
+            </summary>
+            <param name="obj"></param>
             <returns></returns>
         </member>
         <member name="T:FRS.WebApi.Controllers.WeatherForecastController">
@@ -179,6 +241,13 @@
             <param name="simplePrinciple"></param>
             <returns></returns>
         </member>
+        <member name="M:FRS.WebApi.JwtConfig.GenerateJwt.GetAccessUser(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
         <member name="T:FRS.WebApi.JwtConfig.JwtConfig">
             <summary>
             
@@ -237,36 +306,6 @@
             </summary>
         </member>
         <member name="P:FRS.WebApi.JwtConfig.JwtConfig.SigningCredentials">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:FRS.WebApi.JwtConfig.JwtTokenResult">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.access_token">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.refresh_token">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.expires_in">
-            <summary>
-            过期时间(单位秒)
-            </summary>
-        </member>
-        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.token_type">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:FRS.WebApi.JwtConfig.JwtTokenResult.user">
             <summary>
             
             </summary>

@@ -1,4 +1,5 @@
 ﻿using FRS.BusinessLayer;
+using FRS.Common;
 using FRS.DatabaseContext;
 using FRS.Models;
 using System;
@@ -93,21 +94,21 @@ namespace FRS.DatabaseContextTest
         {
             CertificateType member = BLCertificateType.GetAll().Last();
 
-            int rows = BLCertificateType.Remove(member);
-            MessageBox.Show(rows.ToString());
+            ErrorCode code = BLCertificateType.Remove(member);
+            MessageBox.Show(code.ToString());
         }
 
         private void btUpdateCertificateType_Click(object sender, EventArgs e)
         {
             CertificateType member = BLCertificateType.GetAll().Last();
             member.CertificateTypeName = member.CertificateTypeName + "Update";
-            int rows = BLCertificateType.Update(member);
-            MessageBox.Show(rows.ToString());
+            ErrorCode code = BLCertificateType.Modify(member);
+            MessageBox.Show(code.ToString());
         }
 
         private void btGetFamily_Click(object sender, EventArgs e)
         {
-            Family member = BLFamily.Get(1);
+            Family member = BLFamily.Get("123");
             if (member != null)
                 MessageBox.Show(member.FamilyId.ToString());
         }

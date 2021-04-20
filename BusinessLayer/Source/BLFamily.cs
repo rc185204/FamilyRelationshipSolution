@@ -27,7 +27,7 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="FamilyId"></param>
         /// <returns></returns>
-        public static Family Get(int FamilyId)
+        public static Family Get(string FamilyId)
         {
             Family Family = null;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
@@ -65,6 +65,8 @@ namespace FRS.BusinessLayer
                 }
                 else
                 {
+                    var guid = Guid.NewGuid().ToString();
+                    Member.FamilyId = guid;
                     dbContext.Family.Add(Member);
                     int rows = dbContext.SaveChanges();
                     if (rows <= 0)
@@ -81,16 +83,25 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="Member"></param>
         /// <returns></returns>
-        public static int Remove(Family Member)
+        public static ErrorCode Remove(Family Member)
         {
-            int rows = 0;
+            ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 Family rem = dbContext.Family.Find(Member.FamilyId);
-                dbContext.Family.Remove(rem);
-                rows = dbContext.SaveChanges();
+                if (rem != null)
+                {
+                    dbContext.Family.Remove(rem);
+                    int rows = dbContext.SaveChanges();
+                    if (rows > 0)
+                        code = ErrorCode.Success;
+                    else
+                        code = ErrorCode.DataDetectError;
+                }
+                else
+                    code = ErrorCode.Success;
             }
-            return rows;
+            return code;
         }
 
         /// <summary>
@@ -98,16 +109,24 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="FamilyId"></param>
         /// <returns></returns>
-        public static int Remove(int FamilyId)
+        public static ErrorCode Remove(int FamilyId)
         {
-            int rows = 0;
+            ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 Family rem = dbContext.Family.Find(FamilyId);
-                dbContext.Family.Remove(rem);
-                rows = dbContext.SaveChanges();
+                if (rem != null)
+                {
+                    dbContext.Family.Remove(rem);
+                    if (dbContext.SaveChanges() > 0)
+                        code = ErrorCode.Success;
+                    else
+                        code = ErrorCode.DataDetectError;
+                }
+                else
+                    code = ErrorCode.Success;
             }
-            return rows;
+            return code;
         }
 
         /// <summary>
@@ -115,21 +134,30 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="Member"></param>
         /// <returns></returns>
-        public static int Update(Family Member)
+        public static ErrorCode Modify(Family Member)
         {
-            int rows = 0;
+            ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 Family up = dbContext.Family.Find(Member.FamilyId);// Find 它可以帮助我们通过主键来查找对应的实体。并且如果相应的实体已经被DbContext缓存，EF会在缓存中直接返回对应的实体，而不会执行数据库访问。
-                up.FamilyName = Member.FamilyName;
-                up.FamilyOrigin = Member.FamilyOrigin; 
-                up.FamilyHistory = Member.FamilyHistory;
-                up.GenerationInfo = Member.GenerationInfo;
-                up.Other1 = Member.Other1;
-                up.Other2 = Member.Other2;
-                rows = dbContext.SaveChanges();
+                if (up != null)
+                {
+                    up.FamilyName = Member.FamilyName;
+                    up.FamilyOrigin = Member.FamilyOrigin;
+                    up.FamilyHistory = Member.FamilyHistory;
+                    up.GenerationInfo = Member.GenerationInfo;
+                    up.Other1 = Member.Other1;
+                    up.Other2 = Member.Other2;
+                    int rows = dbContext.SaveChanges();
+                    if (rows > 0)
+                        code = ErrorCode.Success;
+                    else
+                        code = ErrorCode.DataModifyError;
+                }
+                else
+                    code = ErrorCode.DataNotExist;                
             }
-            return rows;
+            return code;
         }
     }
 }

@@ -10,8 +10,6 @@ namespace FRS.Common
 {
     public class HttpResponse
     {
-        private bool success;
-
         private ErrorCode errorCode;
 
         private string description;
@@ -21,7 +19,7 @@ namespace FRS.Common
         /// <summary>
         /// 
         /// </summary>
-        public bool Success { get { return success = ((ErrorCode == ErrorCode.Success) ? true : false); } }
+        public bool Success { get { return (errorCode == ErrorCode.Success); } }
 
         /// <summary>
         /// 

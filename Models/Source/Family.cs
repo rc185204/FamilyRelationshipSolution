@@ -13,7 +13,8 @@ namespace FRS.Models
     {
         [Key]
         [Required]
-        public int FamilyId { get; set; }
+        [MaxLength(50)]
+        public string FamilyId { get; set; }
 
         /// <summary>
         /// 证件类型名称

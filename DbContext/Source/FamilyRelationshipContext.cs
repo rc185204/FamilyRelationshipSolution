@@ -6,34 +6,48 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace FRS.DatabaseContext
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FamilyRelationshipContext: DbContext
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
         public DbSet<Role> Role { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DbSet<User> User { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DbSet<Family> Family { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DbSet<FamilyMember> FamilyMember { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DbSet<CertificateType> CertificateType { get; set; }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public FamilyRelationshipContext() : base()
         {
 
         }
 
         /// <summary>
-        /// 继承父类，
-        /// "name=FamilyRelationship" base中使用数据库连接字符串
+        /// 
         /// </summary>
-        //public FamilyRelationshipContext() : base("Data Source = Localhost;Initial Catalog = FamilyRelationshipSolution;User Id = sa;Password = sa;")
-        //{
-
-        //}
-
+        /// <param name="connectionStr"></param>
         public FamilyRelationshipContext(string connectionStr) : base(connectionStr)
         {
 
@@ -57,9 +71,13 @@ namespace FRS.DatabaseContext
             base.OnModelCreating(modelBuilder);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static FamilyRelationshipContext GetFamilyRelationshipContext()
         {
-            FamilyRelationshipContext dbContext = new FamilyRelationshipContext(AppSettings.SqlConn);
+            FamilyRelationshipContext dbContext = new (AppSettings.SqlConn);
             return dbContext;
         }
 

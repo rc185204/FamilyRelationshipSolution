@@ -58,7 +58,7 @@ namespace FRS.WebApi.Controllers
             bool suc = false;
             if (ModelState.IsValid)
             {
-                user = await Task.Factory.StartNew<User>(() => BLUser.Valid(uname, pwd));
+                user = await Task.Factory.StartNew(() => BLUser.Valid(uname, pwd));
                 if (user != null)
                 {
                     //var refreshToken = Guid.NewGuid().ToString();
@@ -70,7 +70,7 @@ namespace FRS.WebApi.Controllers
             ErrorCode errorCode = suc ? ErrorCode.Success : ErrorCode.Login_Error;
             string description = suc ? string.Empty : "user name or password error";
 
-            HttpResponse response = new HttpResponse(
+            HttpResponse response = new (
                 errorCode,
                 Ok(value: new { token = jwtStr, user = user }),
                 description);
@@ -84,21 +84,19 @@ namespace FRS.WebApi.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("RefreshToken")]
-        public async Task<HttpResponse> RefreshToken([FromBody] RefreshTokenBody request)
+        public async Task<HttpResponse> Post([FromBody] RefreshTokenBody request)
         {
             string jwtStr = string.Empty;
             string description = string.Empty;
             ClaimsPrincipal simplePrinciple = null;
-            bool suc = await Task.Factory.StartNew<bool>(() => GenerateJwt.ValidateAccessToken(request.AccessToken, out simplePrinciple));
+            bool suc = await Task.Factory.StartNew(() => GenerateJwt.ValidateAccessToken(request.AccessToken, out simplePrinciple));
             ErrorCode errorCode = suc ? ErrorCode.Success : ErrorCode.AccessToken_NoUseful;
             if (suc)
-            {
                 jwtStr = GenerateJwt.RefreshEncodedTokenAsync(simplePrinciple);
-            }
             else
                 description = "AccessToken has expired";
 
-            HttpResponse response = new HttpResponse(
+            HttpResponse response = new (
                 errorCode,
                 Ok(value: new { token = jwtStr }),
                 description

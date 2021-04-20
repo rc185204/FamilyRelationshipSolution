@@ -87,7 +87,10 @@ namespace FRS.Common
         /// </summary>
         No_User,
 
-
+        /// <summary>
+        /// 权限不足
+        /// </summary>
+        NoAccess,
         #endregion
     }
 

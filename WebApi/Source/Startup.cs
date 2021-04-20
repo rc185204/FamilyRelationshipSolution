@@ -72,7 +72,20 @@ namespace FRS.WebApi
             
             AppSettings.SqlConn = AppSettings.GetAppSeting("SqlConn");
             #endregion
-
+            using (var db = new FamilyRelationshipContext(AppSettings.SqlConn))
+            {
+                bool flag = db.Database.CreateIfNotExists();
+                if (flag == true)
+                {
+                    db.Role.Add(new Models.Role { RoleName = "System admin", Description = "System admin" });
+                    db.Role.Add(new Models.Role { RoleName = "Family admin", Description = "Family admin" });
+                    db.Role.Add(new Models.Role { RoleName = "Family member", Description = "Family member" });
+                    //db.User.Add(new Models.User { UserName = "sadmin", Password = "sadmin", UserTrueName = "sadmin" });
+                    db.CertificateType.Add(new Models.CertificateType { CertificateTypeName = "一代身份证", Description = "一代身份证" });
+                    db.CertificateType.Add(new Models.CertificateType { CertificateTypeName = "二代身份证", Description = "二代身份证" });
+                    db.SaveChanges();
+                }
+            }
             #region Swagger config
 
             services.AddSwaggerGen(c =>
