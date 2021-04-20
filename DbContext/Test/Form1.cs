@@ -81,7 +81,7 @@ namespace FRS.DatabaseContextTest
         private void btAddCertificateType_Click(object sender, EventArgs e)
         {
             CertificateType member = new CertificateType();
-            member.CertificateTypeNmae = "驾驶证2";
+            member.CertificateTypeName = "驾驶证2";
             member.Description = "驾驶证2";
             //member.CertificateTypeId = 100;
 
