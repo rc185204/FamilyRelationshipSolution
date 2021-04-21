@@ -3,7 +3,7 @@
 namespace FRS.Common
 {
     /// <summary>
-    /// 错误码
+    /// 
     /// </summary>
     public enum ErrorCode
     {

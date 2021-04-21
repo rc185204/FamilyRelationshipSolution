@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FRS.Models
 {
+    /// <summary>
+    /// user info
+    /// </summary>
     [Table("User")]
     public class User
     {
@@ -21,7 +24,7 @@ namespace FRS.Models
         public int UserId { get; set; }
 
         /// <summary>
-        /// 用户名
+        /// user login name
         /// </summary>
         [Required]
         [MinLength(4)]
@@ -30,7 +33,7 @@ namespace FRS.Models
         public string UserName { get; set; }
 
         /// <summary>
-        /// 密码
+        /// password
         /// </summary>
         [Required]
         [MinLength(6)]
@@ -59,11 +62,11 @@ namespace FRS.Models
         /// <summary>
         /// 
         /// </summary>
-        [ForeignKey("RoleId")]//外键 [ForeignKey(导航属性名)] 依赖实体中在导航属性上指定属性名
+        [ForeignKey("RoleId")]
         public Role Role { get; set; }
 
         /// <summary>
-        /// 
+        /// a user can link a faily
         /// </summary>
         [MaxLength(50)]
         public string FamilyId { get; set; }
@@ -73,6 +76,17 @@ namespace FRS.Models
         /// </summary>
         [ForeignKey("FamilyId")]
         public Family Family { get; set; }
+
+        ///// <summary>
+        ///// ，
+        ///// </summary>
+        //public int? FamilyMemberId { get; set; }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //[ForeignKey("FamilyMemberId")]
+        //public FamilyMember FamilyMember { get; set; }
 
         /// <summary>
         /// 

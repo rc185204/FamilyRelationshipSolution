@@ -61,11 +61,11 @@ namespace FRS.DatabaseContext
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //// 禁用默认表名复数形式
+            //// 
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //// 禁用一对多级联删除
+            //// 
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            //// 禁用多对多级联删除
+            //// 
             //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             base.OnModelCreating(modelBuilder);

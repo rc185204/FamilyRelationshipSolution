@@ -11,6 +11,9 @@ using System.Linq.Expressions;
 
 namespace FRS.BusinessLayer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BLUser
     {
         /// <summary>
@@ -206,22 +209,36 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
-        public static ErrorCode Add(User member)
+        public static ErrorCode Add(User member, User adminUser)
         {
             ErrorCode code = ErrorCode.Unknown_Error;
+            if (adminUser == null || member == null)
+            {
+                code = ErrorCode.DataNotExist;
+                return code;
+            }
+
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                int count = dbContext.User.Where(c => c.UserName == member.UserName.Trim()).Count();
-                if (count > 0)
-                    code = ErrorCode.DataAlreadyExist;
+                User admin = dbContext.User.Find(adminUser.UserId);// 判断管理员的合法性
+                if (admin == null)
+                    code = ErrorCode.No_User;
+                else if (adminUser.RoleId > member.RoleId)
+                    code = ErrorCode.NoAccess;
                 else
                 {
-                    dbContext.User.Add(member);
-                    int rows = dbContext.SaveChanges();
-                    if (rows <= 0)
-                        code = ErrorCode.DataAddError;
+                    int count = dbContext.User.Where(c => c.UserName == member.UserName.Trim()).Count();
+                    if (count > 0)
+                        code = ErrorCode.DataAlreadyExist;
                     else
-                        code = ErrorCode.Success;
+                    {
+                        dbContext.User.Add(member);
+                        int rows = dbContext.SaveChanges();
+                        if (rows <= 0)
+                            code = ErrorCode.DataAddError;
+                        else
+                            code = ErrorCode.Success;
+                    }
                 }
             }
             return code;
@@ -232,23 +249,36 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
-        public static ErrorCode Remove(User member)
+        public static ErrorCode Remove(User member, User adminUser)
         {
             ErrorCode code = ErrorCode.Unknown_Error;
+            if (adminUser == null || member == null)
+            {
+                code = ErrorCode.DataNotExist;
+                return code;
+            }
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                User rem = dbContext.User.Find(member.UserId);
-                if (rem != null)
-                {
-                    dbContext.User.Remove(rem);
-                    int rows = dbContext.SaveChanges();
-                    if (rows > 0)
-                        code = ErrorCode.Success;
-                    else
-                        code = ErrorCode.DataDetectError;
-                }
+                User admin = dbContext.User.Find(adminUser.UserId);// 判断管理员的合法性
+                if (admin == null)
+                    code = ErrorCode.No_User;
+                else if (adminUser.RoleId > member.RoleId)
+                    code = ErrorCode.NoAccess;
                 else
-                    code = ErrorCode.Success;
+                {
+                    User rem = dbContext.User.Find(member.UserId);
+                    if (rem != null)
+                    {
+                        dbContext.User.Remove(rem);
+                        int rows = dbContext.SaveChanges();
+                        if (rows > 0)
+                            code = ErrorCode.Success;
+                        else
+                            code = ErrorCode.DataDetectError;
+                    }
+                    else
+                        code = ErrorCode.Success;
+                }
             }
             return code;
         }
@@ -293,6 +323,39 @@ namespace FRS.BusinessLayer
                     else
                         code = ErrorCode.DataNotExist;
                 }
+            }
+            return code;
+        }
+
+        /// <summary>
+        /// 修改用户的基本信息
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public static ErrorCode ModifyBaseInfo(User member)
+        {
+            ErrorCode code = ErrorCode.Unknown_Error;
+            if (member == null)
+            {
+                code = ErrorCode.DataNotExist;
+                return code;
+            }
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
+            {                
+                User up = dbContext.User.Find(member.UserId);
+                if (up != null)
+                {
+                    up.Password = member.Password;
+                    up.UserTrueName = member.UserTrueName;
+                    int rows = dbContext.SaveChanges();
+                    if (rows > 0)
+                        code = ErrorCode.Success;
+                    else
+                        code = ErrorCode.DataModifyError;
+                }
+                else
+                    code = ErrorCode.DataNotExist;
+                
             }
             return code;
         }

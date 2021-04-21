@@ -8,32 +8,41 @@ using System.Threading.Tasks;
 
 namespace FRS.Models
 {
-    [Table("Role"/*, Schema = "FamilyRelationship"*/)]//数据库名为FamilyRelationship.Role.用于实体，配置实体对应的数据库表名和表结构
+    /// <summary>
+    /// role
+    /// </summary>
+    [Table("Role"/*, Schema = "FamilyRelationship"*/)]//FamilyRelationship.Role.
     public class Role
     {
 
         public Role() { }
 
-
-        [Key]//数据库中对应列为主键
-        [Required]//属性不为空，数据中对应列
+        /// <summary>
+        /// 
+        /// </summary>
+        [Key]
+        [Required]// must not null
         public int RoleId { get; set; }
 
+        /// <summary>
+        /// RoleName
+        /// exp: System admin; Family admin; Family member
+        /// </summary>
         [Required]
-        [MinLength(4)]//属性和数据库中的最小的string长度
-        [MaxLength(20)]//属性和数据库中的最大的string长度
-        [ConcurrencyCheck]//数据库中对应列进行乐观并发检测，主要用于解决高并发问题
+        [MinLength(4)]
+        [MaxLength(20)]
+        [ConcurrencyCheck]
         public string RoleName { get; set; }
 
         /// <summary>
-        /// 描述
+        /// 
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// 在update操作时，包含在where子句中
-        /// 数据库中对应列为timestamp类型，主要用于解决高并发问题.
-        /// 注：一个类只能用一次，且修饰的属性必须为byte[] 类型
+        /// update sql , include where RowVersion=0xXXXXX
+        /// database timestamp type，
+        /// note：one class only have a timestamp, and it must typeof byte[]
         /// </summary>
         [Timestamp]
         public byte[] RowVersion { get; set; }

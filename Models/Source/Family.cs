@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FRS.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Table("Family")]
     public class Family
     {
@@ -17,7 +20,8 @@ namespace FRS.Models
         public string FamilyId { get; set; }
 
         /// <summary>
-        /// 证件类型名称
+        /// family name
+        /// exp: jack's family
         /// </summary>
         [Required]
         [MaxLength(100)]
@@ -25,31 +29,33 @@ namespace FRS.Models
         public string FamilyName { get; set; }
 
         /// <summary>
-        /// 家族发源地
+        /// Origin
+        /// exp: Birthplace of George I
         /// </summary>
         [MaxLength(100)]
         public string FamilyOrigin { get; set; }
 
         /// <summary>
-        /// 家族历史
+        /// the history of this family
+        /// famous story, mission or important historical event of this family
         /// </summary>
         [MaxLength(1000)]
         public string FamilyHistory { get; set; }
 
         /// <summary>
-        /// 家族传承的辈份依据，
+        /// A word or famous quote from the family
         /// </summary>
         [MaxLength(500)]
         public string GenerationInfo { get; set; }
 
         /// <summary>
-        /// 预留1
+        /// 
         /// </summary>
         [MaxLength(100)]
         public string Other1 { get; set; }
 
         /// <summary>
-        /// 预留2
+        /// 
         /// </summary>
         [MaxLength(100)]
         public string Other2 { get; set; }
@@ -61,9 +67,9 @@ namespace FRS.Models
         public byte[] RowVersion { get; set; }
 
         ///// <summary>
-        ///// 家族成员集合
+        ///// 
         ///// </summary>
-        //[NotMapped]//不映射到数据库中
+        //[NotMapped]
         //public List<FamilyMember> FamilyMembers { get; set; }
     }
 }

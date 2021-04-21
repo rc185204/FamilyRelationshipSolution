@@ -9,6 +9,9 @@ using FRS.Common;
 
 namespace FRS.BusinessLayer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BLFamily
     {
 
@@ -47,6 +50,16 @@ namespace FRS.BusinessLayer
                 //}
             }
             return Family;
+        }
+
+        public static List<Family> GetAll()
+        {
+            List<Family> list = null;
+            using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
+            {
+                list = dbContext.Family.ToList();
+            }
+            return list;
         }
 
         /// <summary>
@@ -99,7 +112,7 @@ namespace FRS.BusinessLayer
                         code = ErrorCode.DataDetectError;
                 }
                 else
-                    code = ErrorCode.Success;
+                    code = ErrorCode.DataNotExist;
             }
             return code;
         }
@@ -139,7 +152,8 @@ namespace FRS.BusinessLayer
             ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                Family up = dbContext.Family.Find(Member.FamilyId);// Find 它可以帮助我们通过主键来查找对应的实体。并且如果相应的实体已经被DbContext缓存，EF会在缓存中直接返回对应的实体，而不会执行数据库访问。
+                // Find 它可以帮助我们通过主键来查找对应的实体。并且如果相应的实体已经被DbContext缓存，EF会在缓存中直接返回对应的实体，而不会执行数据库访问。
+                Family up = dbContext.Family.Find(Member.FamilyId);
                 if (up != null)
                 {
                     up.FamilyName = Member.FamilyName;
@@ -155,7 +169,7 @@ namespace FRS.BusinessLayer
                         code = ErrorCode.DataModifyError;
                 }
                 else
-                    code = ErrorCode.DataNotExist;                
+                    code = ErrorCode.DataNotExist;
             }
             return code;
         }

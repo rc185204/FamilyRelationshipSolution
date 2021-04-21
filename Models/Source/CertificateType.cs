@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 
 namespace FRS.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Table("CertificateType")]
     public class CertificateType
     {
 
         /// <summary>
-        /// 当key在数据库中是自增模式，即使外部对象给CertificateTypeId赋值，也不会生效
-        /// 由于在EF操作的时候，需要使用set对象，因此这里不能省却 set 处理
+        /// 
         /// </summary>
         [Key]
         [Required]
         public int CertificateTypeId { get; set; }
 
         /// <summary>
-        /// 证件类型名称
+        /// 
         /// </summary>
         [Required]
         [MaxLength(50)]
@@ -29,7 +31,7 @@ namespace FRS.Models
         public string CertificateTypeName { get; set; }
 
         /// <summary>
-        /// 描述
+        /// 
         /// </summary>
         public string Description { get; set; }
 

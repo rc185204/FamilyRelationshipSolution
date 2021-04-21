@@ -67,18 +67,10 @@
             
             </summary>
         </member>
-        <member name="M:FRS.WebApi.Controllers.FamilyController.Get(System.String)">
+        <member name="M:FRS.WebApi.Controllers.FamilyController.Get">
             <summary>
-            查找对应FamilyId的家族信息
+            查找Family信息
             </summary>
-            <param name="FamilyId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:FRS.WebApi.Controllers.FamilyController.Post(FRS.Models.Family)">
-            <summary>
-            修改
-            </summary>
-            <param name="obj"></param>
             <returns></returns>
         </member>
         <member name="M:FRS.WebApi.Controllers.FamilyController.Put(FRS.Models.Family)">
@@ -91,6 +83,48 @@
         <member name="M:FRS.WebApi.Controllers.FamilyController.Delete(FRS.Models.Family)">
             <summary>
             删除
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyController.Post(FRS.Models.Family)">
+            <summary>
+            修改
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FRS.WebApi.Controllers.FamilyMemberController">
+            <summary>
+            家族成员控制器
+            本家族用户可以查看所有家族成员信息，
+            member成员所有数据，包括自己的数据，应该由家庭管理员修改
+            </summary>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyMemberController.Get(System.String)">
+            <summary>
+            获取家庭成员列表
+            </summary>
+            <param name="FamilyId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyMemberController.Post(FRS.Models.FamilyMember)">
+            <summary>
+            添加家族成员
+            </summary>
+            <param name="obj">POST请求的表单数据放在 body中，而GET的请求参数在url中，需要使用FromUri</param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyMemberController.Delete(FRS.Models.FamilyMember)">
+            <summary>
+            删除成员
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FRS.WebApi.Controllers.FamilyMemberController.Put(FRS.Models.FamilyMember)">
+            <summary>
+            修改成员信息
             </summary>
             <param name="obj"></param>
             <returns></returns>
@@ -123,10 +157,12 @@
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="M:FRS.WebApi.Controllers.UserController.Put(FRS.Models.User)">
+        <member name="M:FRS.WebApi.Controllers.UserController.Put(System.String,System.String,FRS.Models.User)">
             <summary>
-            修改用户信息
+            修改用户密码,TrueName
             </summary>
+            <param name="userName"></param>
+            <param name="password"></param>
             <param name="obj"></param>
             <returns></returns>
         </member>

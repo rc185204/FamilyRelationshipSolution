@@ -17,7 +17,7 @@ namespace FRS.Common
         public static string SqlConn;
 
         /// <summary>
-        /// 设置配置文件
+        /// set config section
         /// </summary>
         /// <param name="section"></param>
         public static void SetAppSetting(IConfigurationSection section)
@@ -26,7 +26,7 @@ namespace FRS.Common
         }
 
         /// <summary>
-        /// 获取配置文件
+        /// get the config string form current section by the key
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>

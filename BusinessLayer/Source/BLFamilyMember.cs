@@ -9,10 +9,13 @@ using FRS.Common;
 
 namespace FRS.BusinessLayer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BLFamilyMember
     {
         /// <summary>
-        /// 获取单一家庭成员
+        /// 
         /// </summary>
         /// <param name="FamilyMemberId"></param>
         /// <returns></returns>
@@ -44,7 +47,7 @@ namespace FRS.BusinessLayer
             List<FamilyMember> list = null;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                list = dbContext.FamilyMember.Where<FamilyMember>(c => c.FamilyId == FamilyId).ToList();
+                list = dbContext.FamilyMember.Where(c => c.FamilyId == FamilyId).ToList();
                 if (list != null && list.Count > 0)
                 {
                     foreach (FamilyMember e in list)
@@ -70,7 +73,7 @@ namespace FRS.BusinessLayer
             ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
-                if (dbContext.FamilyMember.Find(Member.CertificateNumber, Member.CertificateTypeId) != null)
+                if (dbContext.FamilyMember.Where(c=>c.CertificateNumber == Member.CertificateNumber && c.CertificateTypeId == Member.CertificateTypeId).FirstOrDefault() != null)
                 {
                     code = ErrorCode.DataAlreadyExist;
                 }
@@ -92,19 +95,25 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="Member"></param>
         /// <returns></returns>
-        public static int Remove(FamilyMember Member)
+        public static ErrorCode Remove(FamilyMember Member)
         {
-            int rows = 0;
+            ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 FamilyMember rem = dbContext.FamilyMember.Find(Member.FamilyId);
                 if (rem != null)
                 {
                     dbContext.FamilyMember.Remove(rem);
-                    rows = dbContext.SaveChanges();
+                    int rows = dbContext.SaveChanges();
+                    if (rows > 0)
+                        code = ErrorCode.Success;
+                    else
+                        code = ErrorCode.DataDetectError;
                 }
+                else
+                    code = ErrorCode.DataNotExist;                
             }
-            return rows;
+            return code;
         }
 
         /// <summary>
@@ -112,9 +121,9 @@ namespace FRS.BusinessLayer
         /// </summary>
         /// <param name="Member"></param>
         /// <returns></returns>
-        public static int Update(FamilyMember Member)
+        public static ErrorCode Modify(FamilyMember Member)
         {
-            int rows = 0;
+            ErrorCode code = ErrorCode.Unknown_Error;
             using (FamilyRelationshipContext dbContext = FamilyRelationshipContext.GetFamilyRelationshipContext())
             {
                 FamilyMember up = dbContext.FamilyMember.Find(Member.FamilyId);
@@ -151,10 +160,16 @@ namespace FRS.BusinessLayer
                     up.Spouse = Member.Spouse;
                     up.FamilyId = Member.FamilyId;
                     up.Family = Member.Family;
-                    rows = dbContext.SaveChanges();
+                    int rows = dbContext.SaveChanges();
+                    if (rows > 0)
+                        code = ErrorCode.Success;
+                    else
+                        code = ErrorCode.DataModifyError;
                 }
+                else
+                    code = ErrorCode.DataNotExist;
             }
-            return rows;
+            return code;
         }
     }
 }
