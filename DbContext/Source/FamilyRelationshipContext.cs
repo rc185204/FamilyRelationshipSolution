@@ -36,6 +36,7 @@ namespace FRS.DatabaseContext
         /// </summary>
         public DbSet<CertificateType> CertificateType { get; set; }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -53,10 +54,7 @@ namespace FRS.DatabaseContext
 
         }
 
-        //public FamilyRelationshipContext(DbContextOptions<FamilyRelationshipContext> options)
-        //    : base(options)
-        //{
-        //}
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

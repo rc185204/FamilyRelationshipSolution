@@ -49,6 +49,8 @@ namespace FRS.BusinessLayer
             {
                 int count = dbContext.CertificateType.Where(c=>c.CertificateTypeName == Member.CertificateTypeName.Trim()).Count();
                 if (count > 0)
+                //if (dbContext.CertificateType.Find(Member.CertificateTypeName) != null)
+                {
                     code = ErrorCode.DataAlreadyExist;
                 else
                 {

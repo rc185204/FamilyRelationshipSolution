@@ -43,7 +43,7 @@ namespace FRS.WebApi.Log
         {
             Debug(source.GetType(), message);
         }
-
+        
         /// <summary>
         /// 调试信息
         /// </summary>
@@ -54,7 +54,7 @@ namespace FRS.WebApi.Log
         {
             Debug(source.GetType(), string.Format(message, ps));
         }
-
+        
         /// <summary>
         /// 调试信息
         /// </summary>
@@ -68,7 +68,7 @@ namespace FRS.WebApi.Log
                 logger.Debug(message);
             }
         }
-
+        
         /// <summary>
         /// 关键信息
         /// </summary>
@@ -78,7 +78,7 @@ namespace FRS.WebApi.Log
         {
             Info(source.GetType(), message);
         }
-
+        
         /// <summary>
         /// 关键信息
         /// </summary>
@@ -92,7 +92,7 @@ namespace FRS.WebApi.Log
                 logger.Info(message);
             }
         }
-
+        
         /// <summary>
         /// 警告信息
         /// </summary>
@@ -102,7 +102,7 @@ namespace FRS.WebApi.Log
         {
             Warn(source.GetType(), message);
         }
-
+        
         /// <summary>
         /// 警告信息
         /// </summary>
@@ -116,7 +116,7 @@ namespace FRS.WebApi.Log
                 logger.Warn(message);
             }
         }
-
+        
         /// <summary>
         /// 错误信息
         /// </summary>
@@ -126,7 +126,7 @@ namespace FRS.WebApi.Log
         {
             Error(source.GetType(), message);
         }
-
+        
         /// <summary>
         /// 错误信息
         /// </summary>
@@ -140,7 +140,7 @@ namespace FRS.WebApi.Log
                 logger.Error(message);
             }
         }
-
+        
         /// <summary>
         /// 失败信息
         /// </summary>
@@ -150,7 +150,7 @@ namespace FRS.WebApi.Log
         {
             Fatal(source.GetType(), message);
         }
-
+        
         /// <summary>
         /// 失败信息
         /// </summary>
@@ -176,7 +176,7 @@ namespace FRS.WebApi.Log
         {
             Debug(source.GetType(), message, exception);
         }
-
+        
         /// <summary>
         /// 调试信息
         /// </summary>
@@ -187,7 +187,7 @@ namespace FRS.WebApi.Log
         {
             GetLogger(source).Debug(message, exception);
         }
-
+        
         /// <summary>
         /// 关键信息
         /// </summary>
@@ -198,7 +198,7 @@ namespace FRS.WebApi.Log
         {
             Info(source.GetType(), message, exception);
         }
-
+        
         /// <summary>
         /// 关键信息
         /// </summary>
@@ -209,7 +209,7 @@ namespace FRS.WebApi.Log
         {
             GetLogger(source).Info(message, exception);
         }
-
+        
         /// <summary>
         /// 警告信息
         /// </summary>
@@ -220,7 +220,7 @@ namespace FRS.WebApi.Log
         {
             Warn(source.GetType(), message, exception);
         }
-
+        
         /// <summary>
         /// 警告信息
         /// </summary>
@@ -231,7 +231,7 @@ namespace FRS.WebApi.Log
         {
             GetLogger(source).Warn(message, exception);
         }
-
+        
         /// <summary>
         /// 错误信息
         /// </summary>
@@ -242,7 +242,7 @@ namespace FRS.WebApi.Log
         {
             Error(source.GetType(), message, exception);
         }
-
+        
         /// <summary>
         /// 错误信息
         /// </summary>
@@ -253,7 +253,7 @@ namespace FRS.WebApi.Log
         {
             GetLogger(source).Error(message, exception);
         }
-
+        
         /// <summary>
         /// 失败信息
         /// </summary>
@@ -264,7 +264,7 @@ namespace FRS.WebApi.Log
         {
             Fatal(source.GetType(), message, exception);
         }
-
+        
         /// <summary>
         /// 失败信息
         /// </summary>
