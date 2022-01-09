@@ -49,7 +49,7 @@ namespace FRS.WebApi.Controllers
         public async Task<HttpResponse> Get(string uname, string pwd)
         {
             //_logger.Error(typeof(AuthenticationController), "这是错误日志", new Exception("123"));
-            //_logger.Debug(typeof(AuthenticationController), "这个是bug日志");
+            _logger.Debug(typeof(AuthenticationController), "这个是bug日志 Get");
             //throw new Exception("error");
 
             string jwtStr = string.Empty;

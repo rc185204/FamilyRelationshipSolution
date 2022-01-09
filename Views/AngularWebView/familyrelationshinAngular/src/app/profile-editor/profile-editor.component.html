@@ -1,0 +1,122 @@
+<p>profile-editor works!</p>
+<p>表单数组测试</p>
+
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName">
+  
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName">
+  
+    <p>Complete the form to enable button.</p>
+    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+</form>
+
+
+<h1>———————更加复杂的表达数据数组—————————</h1>
+<form [formGroup]="profileFormarray" >
+
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName">
+  
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName">
+  
+    <div formGroupName="address">
+        <h2>Address</h2>
+      
+        <label for="street">Street: </label>
+        <input id="street" type="text" formControlName="street">
+      
+        <label for="city">City: </label>
+        <input id="city" type="text" formControlName="city">
+      
+        <label for="state">State: </label>
+        <input id="state" type="text" formControlName="state">
+      
+        <label for="zip">Zip Code: </label>
+        <input id="zip" type="text" formControlName="zip">
+    </div>
+
+    <p>Complete the form to enable button.</p>
+    <button type="submit" [disabled]="!profileFormarray.valid">Submit</button>
+    <button (click)="updateProfile()">Update Profile</button>
+</form>
+
+<h1>———————使用 FormBuilder 服务生成控件—————————</h1>
+<form [formGroup]="profileFormBuilder" >
+
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName">
+  
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName">
+  
+    <div formGroupName="address">
+        <h2>Address</h2>
+      
+        <label for="street">Street: </label>
+        <input id="street" type="text" formControlName="street">
+      
+        <label for="city">City: </label>
+        <input id="city" type="text" formControlName="city">
+      
+        <label for="state">State: </label>
+        <input id="state" type="text" formControlName="state">
+      
+        <label for="zip">Zip Code: </label>
+        <input id="zip" type="text" formControlName="zip">
+    </div>
+    
+    <p>Form value: {{ profileFormBuilder.value | json  }}</p>
+
+    <p>Form Status: {{ profileFormBuilder.status }}</p>
+    
+    <button type="submit" [disabled]="!profileFormBuilder.valid">Submit</button>
+    <button (click)="updateProfilebuilder()">Update Profile</button>
+</form>
+
+<h1>———————动态创建表单—————————</h1>
+<form [formGroup]="profileFormBuilderArray" >
+
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName">
+  
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="lastName">
+  
+    <div formGroupName="address">
+        <h2>Address</h2>
+      
+        <label for="street">Street: </label>
+        <input id="street" type="text" formControlName="street">
+      
+        <label for="city">City: </label>
+        <input id="city" type="text" formControlName="city">
+      
+        <label for="state">State: </label>
+        <input id="state" type="text" formControlName="state">
+      
+        <label for="zip">Zip Code: </label>
+        <input id="zip" type="text" formControlName="zip">        
+    </div>
+
+    <div formArrayName="aliases">
+        <h2>Aliases</h2>
+        <button (click)="addAlias()" type="button">+ Add another alias</button>
+    
+        <div *ngFor="let alias of aliases.controls; let i=index">
+          <!-- The repeated alias template -->
+          <label for="alias-{{ i }}">Alias:</label>
+          <input id="alias-{{ i }}" type="text" [formControlName]="i">
+        </div>
+      </div>
+
+   
+      <p>Form value: {{ profileFormBuilderArray.value | json  }}</p>
+
+      <p>Form Status: {{ profileFormBuilderArray.status }}</p>
+    <button type="submit" [disabled]="!profileFormBuilderArray.valid">Submit</button>
+    
+</form>

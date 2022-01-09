@@ -1,0 +1,31 @@
+<p>authentication works!</p>
+<div>
+
+    
+    <input type="text" name="userName" #userName />
+    <input type="password" name="password" #password/>
+    <button (click)="login(userName.value, password.value);">confirm</button>
+    <button (click)="test();">test</button>
+
+ </div>
+
+ <h3>Get configuration from JSON file</h3>
+<div>
+  <button (click)="clear(); showConfig()">get</button>
+  <button (click)="clear(); showConfigResponse()">getResponse</button>
+  <button (click)="clear()">clear</button>
+  <button (click)="clear(); makeError()">error</button>
+  <span *ngIf="config">
+    <p>debugging  is "{{config.debugging}}"</p>
+    <p>apiUrl is "{{config.apiUrl}}"</p>
+    <div *ngIf="headers">
+      Response headers:
+      <ul>
+        <li *ngFor="let header of headers">{{header}}</li>
+      </ul>
+    </div>
+  </span>
+</div>
+<p *ngIf="error" class="error">{{error | json}}</p>
+
+

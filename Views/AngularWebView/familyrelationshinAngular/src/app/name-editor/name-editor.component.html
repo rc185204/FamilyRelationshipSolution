@@ -1,0 +1,8 @@
+<p>name-editor works!</p>
+<p>单个表单数据测试</p>
+<label for="name">Name: </label>
+<input id="name" type="text" [formControl]="name2">
+<p>Value: {{ name2.value }}</p>
+
+<button (click)="updateName()">Update Name</button>
+<button (click)="getCurrentName()">Get Name</button>
