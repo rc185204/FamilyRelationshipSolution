@@ -52,6 +52,7 @@ namespace FRS.BusinessLayer
                 //if (dbContext.CertificateType.Find(Member.CertificateTypeName) != null)
                 {
                     code = ErrorCode.DataAlreadyExist;
+                }
                 else
                 {
                     dbContext.CertificateType.Add(Member);
